@@ -42,7 +42,8 @@ export class TransactionEncryption extends Component {
           keySize: 128 / 32,
         });
         //initialization vector - 1st 16 chars of userId
-        var iv = CryptoJS.enc.Utf8.parse(this.user.userId.slice(0, 16));
+        var md5 = CryptoJS.MD5(resUser.data.rsaPublicKey).toString().slice(0, 16);
+        var iv = CryptoJS.enc.Utf8.parse(md5);
         var aesOptions = {
           mode: CryptoJS.mode.CBC,
           padding: CryptoJS.pad.Pkcs7,
